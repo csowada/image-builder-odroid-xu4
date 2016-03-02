@@ -11,6 +11,14 @@ echo "nameserver 8.8.8.8" > /etc/resolv.conf
 wget -q https://packagecloud.io/gpg.key -O - | apt-key add -
 echo 'deb https://packagecloud.io/Hypriot/Schatzkiste/debian/ wheezy main' > /etc/apt/sources.list.d/hypriot.list
 
+# set up odroid repository
+wget -O- http://oph.mdrjr.net/meveric/meveric.asc | apt-key add -
+echo 'deb http://oph.mdrjr.net/meveric wheezy main' > /etc/apt/sources.list.d/odroid-meveric.list
+# wget /etc/apt/sources.list.d/meveric-wheezy-main.list http://oph.mdrjr.net/meveric/sources.lists/meveric-wheezy-main.list
+
+
+
+
 # update all apt repository lists
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
@@ -45,10 +53,13 @@ apt-get install -y u-boot-tools initramfs-tools
 #-don't create /media/boot, then all files will be installed in /boot
 #mkdir -p /media/boot
 apt-get install -y initramfs-tools
-wget -q -O /tmp/bootini.deb http://deb.odroid.in/5422/pool/main/b/bootini/bootini_20151220-14_armhf.deb
-wget -q -O /tmp/linux-image-3.10.92-67_20151123_armhf.deb http://deb.odroid.in/umiddelb/linux-image-3.10.92-67_20151123_armhf.deb
-dpkg -i /tmp/bootini.deb /tmp/linux-image-3.10.92-67_20151123_armhf.deb
-rm -f /tmp/bootini.deb /tmp/linux-image-3.10.92-67_20151123_armhf.deb
+#wget -q -O /tmp/bootini.deb http://deb.odroid.in/5422/pool/main/b/bootini/bootini_20151220-14_armhf.deb
+#wget -q -O /tmp/linux-image-3.10.92-67_20151123_armhf.deb http://deb.odroid.in/umiddelb/linux-image-3.10.92-67_20151123_armhf.deb
+#dpkg -i /tmp/bootini.deb /tmp/linux-image-3.10.92-67_20151123_armhf.deb
+#rm -f /tmp/bootini.deb /tmp/linux-image-3.10.92-67_20151123_armhf.deb
+
+#apt-get install linux-headers-armhf-odroid-u
+apt-get install linux-image-armhf-odroid-u
 
 # set device label and version number
 echo "HYPRIOT_DEVICE=\"$HYPRIOT_DEVICE\"" >> /etc/os-release
