@@ -19,7 +19,7 @@ ROOTFS_TAR_PATH="$BUILD_RESULT_PATH/$ROOTFS_TAR"
 
 # device specific settings
 HYPRIOT_IMAGE_VERSION=${VERSION:="dirty"}
-HYPRIOT_IMAGE_NAME="sd-card-odroid-xu4-${HYPRIOT_IMAGE_VERSION}.img"
+HYPRIOT_IMAGE_NAME="sd-card-odroid-u3-${HYPRIOT_IMAGE_VERSION}.img"
 IMAGE_ROOTFS_PATH="/image-rootfs.tar.gz"
 QEMU_ARCH="arm"
 export HYPRIOT_IMAGE_VERSION
@@ -65,14 +65,14 @@ losetup
 # download current bootloader/u-boot images from hardkernel
 # (this one is able to boot from a EXT4 file system)
 _commit=814386d3e43b8ab8d81f04aa7fe402952503d8fe
-wget -q https://github.com/hardkernel/linux/raw/${_commit}/tools/hardkernel/prebuilt_uboot/bl1.bin
-wget -q https://github.com/hardkernel/linux/raw/${_commit}/tools/hardkernel/prebuilt_uboot/bl2.bin
-wget -q https://github.com/hardkernel/linux/raw/${_commit}/tools/hardkernel/prebuilt_uboot/u-boot.bin
-wget -q https://github.com/hardkernel/linux/raw/${_commit}/tools/hardkernel/prebuilt_uboot/tzsw.bin
-dd conv=notrunc if=bl1.bin of="/$HYPRIOT_IMAGE_NAME" seek=1
-dd conv=notrunc if=bl2.bin of="/$HYPRIOT_IMAGE_NAME" seek=31
-dd conv=notrunc if=u-boot.bin of="/$HYPRIOT_IMAGE_NAME" seek=63
-dd conv=notrunc if=tzsw.bin of="/$HYPRIOT_IMAGE_NAME" seek=719
+wget -q https://raw.githubusercontent.com/hardkernel/u-boot/odroid-v2010.12/sd_fuse/bl1.HardKernel
+wget -q https://raw.githubusercontent.com/hardkernel/u-boot/odroid-v2010.12/sd_fuse/bl2.HardKernel
+wget -q https://raw.githubusercontent.com/hardkernel/u-boot/odroid-v2010.12/sd_fuse/u-boot.bin.HardKernel
+wget -q https://raw.githubusercontent.com/hardkernel/u-boot/odroid-v2010.12/sd_fuse/tzsw.HardKernel
+dd conv=notrunc if=bl1.HardKernel of="/$HYPRIOT_IMAGE_NAME" seek=1
+dd conv=notrunc if=bl2.HardKernel of="/$HYPRIOT_IMAGE_NAME" seek=31
+dd conv=notrunc if=u-boot.bin.HardKernel of="/$HYPRIOT_IMAGE_NAME" seek=63
+dd conv=notrunc if=tzsw.HardKernel of="/$HYPRIOT_IMAGE_NAME" seek=719
 #---flash bootloader---
 
 # download our base root file system
