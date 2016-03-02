@@ -2,7 +2,7 @@
 set -ex
 
 # device specific settings
-HYPRIOT_DEVICE="ODROID XU3/XU4"
+HYPRIOT_DEVICE="ODROID U2/U3"
 
 # set up /etc/resolv.conf
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
