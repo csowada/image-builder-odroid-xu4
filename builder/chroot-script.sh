@@ -59,7 +59,7 @@ apt-get install -y initramfs-tools
 #rm -f /tmp/bootini.deb /tmp/linux-image-3.10.92-67_20151123_armhf.deb
 
 #apt-get install linux-headers-armhf-odroid-u
-apt-get install linux-image-armhf-odroid-u
+apt-get install  -y linux-image-armhf-odroid-u
 
 # set device label and version number
 echo "HYPRIOT_DEVICE=\"$HYPRIOT_DEVICE\"" >> /etc/os-release
